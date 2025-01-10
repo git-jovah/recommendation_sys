@@ -6,7 +6,7 @@ import re
 class Movie_rec():
     def __init__(self):
         pass
-    def Knn(self,n):
+    def Knn():
             
         def read_item_name():
             file_name = get_dataset_dir() + "/ml-100k/ml-100k/u.item"
@@ -25,6 +25,24 @@ class Movie_rec():
         sim_options = {"name": "pearson_baseline", "user_based": False}
         algo = KNNBaseline(sim_options=sim_options)
         algo.fit(trainset)
+        df = list([])
+        names = list([])
+        with open(r"C:\Users\JAWAHAR JOVAH/.surprise_data//ml-100k/ml-100k/u.item","r") as f:
+            for i in f.readlines():
+                text = i.split("|",maxsplit=3)
+                for i in text:
+                    df.append(i)
+            for i in range(1,len(df),4):
+                pat1 = re.compile(r"(\w.+)")
+                pat2 = re.compile(r"([a-zA-Z\W\d]+).\(")
+                if pat2.match(df[i]):
+                    name = pat2.findall(df[i])
+                    names.append(name[0])
+                    # print(name[0],"uploaded success..")
+                else:
+                    name = pat1.findall(df[i])
+                    names.append(name[0])
+                    # print(name[0],"uploaded success..")
 
 
         # Read the mappings raw id <-> movie name
@@ -47,9 +65,11 @@ class Movie_rec():
             toy_story_neighbors_names.append(rid_to_name[rid])
 
 
-        print("The 10 nearest neighbors of Toy Story are:")
-        for movie in toy_story_neighbors_names:
-            print(movie)
+        # print("The 10 nearest neighbors of Toy Story are:")
+        # for movie in toy_story_neighbors_names:
+        #     print(movie)
+
+        return toy_story_neighbors_names
 
 if __name__ == '__main__':
     Movie_rec

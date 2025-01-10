@@ -1,0 +1,10 @@
+#ignore log files
+.log
+_pycache_/
+
+#ignore env files
+.env
+rec_env/
+
+# ignore TODO
+TODO.txt
