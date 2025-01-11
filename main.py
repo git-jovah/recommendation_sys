@@ -2,7 +2,7 @@ from flask import Flask,render_template, request
 from algo import Movie_rec
 
 app = Flask(__name__)
-MR = Movie_rec()
+MR = Movie_rec
 
 @app.route("/")
 def home():
@@ -13,9 +13,9 @@ def home():
 def result():
     if request.method == 'POST':
         result = request.form
-        # tsl = Movie_rec.Knn()
+        tsl = MR.Knn()
         # print(tsl)
-        return render_template("Home.html",result = result)
+        return render_template("Home.html",result = result,tsl=tsl)
 
 if __name__ == '__main__':
     app.run(debug=True)

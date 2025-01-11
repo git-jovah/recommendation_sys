@@ -4,8 +4,8 @@ from surprise import SVD, BaselineOnly,get_dataset_dir,KNNBaseline
 import re
 
 class Movie_rec():
-    def __init__(self):
-        pass
+    # def __init__(self):
+    #     pass
     def Knn():
             
         def read_item_name():
