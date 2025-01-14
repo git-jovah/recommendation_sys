@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <form  action="http://127.0.0.1:5000/Home" method="POST">
-            <div width="100%" height="200px" style="padding-top:100px;position: fixed;margin-left: 500px;">
-                <div width="70%" height="200px" style="float: left;">
-                    <p><input type="text" name="Name" placeholder="Movie name .." style="width: 350px;height: 30px;"></p>
+    <body style="width: 100%;height: 100%;">
+        <form  action="http://127.0.0.1:5000/Home" method="POST" style="margin: -1;">
+            <div width="100%" height="200px" style="z-index:1; padding-top: 100px;padding-left: 300px;padding-right: 335px ; position: fixed;background:linear-gradient(to bottom,rgb(255, 255, 255),rgb(255, 255, 255),rgba(255, 255, 255,0.2));">
+                <div width="80%" height="200px" style="float: left;">
+                    <input type="number" name="Top_num" min="3" max="100" value="3" style="width: 40px;height: 30px;border-radius: 30px 0px 0px 30px;">
+                    <input type="text" name="Movie_Name" value = "{{req_name}}" placeholder="Search Movie .." style="width: 350px;height: 30px;" spellcheck="true" >
+                    {%if matlis %}    
+                            <select id = "Lom" name = "Lom" style="width: 350px;height: 35px;border-radius: 0px 30px 30px 0px;">
+                                {% for i in matlis %}
+                                    <option value="{{i}}">{{i}}</option>
+                                {% endfor %}
+                            </select>
+                    {% endif %}
+                    </p>
+
                 </div>
-                <div width="30%" height="auto" style="float: right;padding: 20px;">
-                    <input type="submit" value="submit" style="width: 70px;height: 30px;">
+                <div width="20%" height="200px" style="float: right;padding-left: 10px;">
+                    <input type="submit" value="🔍" style="width: 45px;height: 35px;border-radius: 60px 60px;">
                 </div>
             </div>
         </form>
+        
         <div width="100%" height="150px" style="position: absolute;margin-top: 250px;margin-left:70px;margin-right: 100px;">
-            {% if result %}
-                {% for _,i in result.items() %}
-                <h1> <centre> Movies like "{{i}}" ..</centre></h1>
-                {% endfor %}
+            {% if Lom %}
+                
+                <h1><I> Top {{top_num}} Movies like '{{Lom}}'</I></h1>
+                
             {% endif %}
         </div>
         <div width="100%" height="auto" style="padding-top: 330px;margin-left:50px ;margin-right:70px;">
